@@ -40,4 +40,4 @@ This app is written in Python 3.11. Project dependencies are managed by `poetry`
 The default configuration will send sensor alerts as e-mail to a local SMTP server which can be started using
 `python -m smtpd -c DebuggingServer -n localhost:1025`.
 
-Tests can be executed via `python -m unittest`
+Tests can be executed via `python -m unittest discover -s test`
