@@ -9,5 +9,5 @@ class Sensor(ABC):
         pass
 
     @abstractmethod
-    async def __anext__(self) -> float:
+    async def __anext__(self) -> int:
         pass

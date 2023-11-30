@@ -5,12 +5,14 @@ from typing import Never, Annotated, Literal
 
 from pydantic import BaseModel, Field
 
+from .models.alert import Alert
 from .services import run_main_service, run_alert_service
-from .types import ValidatorType
+from .types import ValidatorType, AlertingChannelType
 
 
 class Config(BaseModel):
     sensors: list[Annotated[ValidatorType, Field(discriminator="type")]]
+    alerting_channels: list[Annotated[AlertingChannelType, Field(discriminator="type")]]
     log_level: Literal["CRITICAL", "FATAL", "ERROR", "WARN", "WARNING", "INFO", "DEBUG", "NOTSET"]
 
 
@@ -29,9 +31,9 @@ async def _run(config_path: Path) -> Never:
 
     logger.info("running sensor validation and alerting pipeline...")
     async with TaskGroup() as tg:
-        alerts = Queue()
+        alerts: Queue[Alert] = Queue()
         tg.create_task(run_main_service(config.sensors, alerts))
-        tg.create_task(run_alert_service(alerts))
+        tg.create_task(run_alert_service(alerts, config.alerting_channels))
 
 
 def run(config_path: Path) -> Never:

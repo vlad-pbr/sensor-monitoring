@@ -13,5 +13,12 @@
       "valid_range": [900, 1100]
     }
   ],
+  "alerting_channels": [
+    {
+      "type": "email",
+      "host": "localhost",
+      "port": 1025
+    }
+  ],
   "log_level": "INFO"
 }
