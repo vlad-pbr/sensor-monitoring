@@ -31,7 +31,7 @@ async def _run(config_path: Path) -> Never:
 
     logger.info("running sensor validation and alerting pipeline...")
     async with TaskGroup() as tg:
-        alerts: Queue[Alert] = Queue()
+        alerts: Queue[Alert] = Queue(maxsize=10)
         tg.create_task(run_main_service(config.sensors, alerts))
         tg.create_task(run_alert_service(alerts, config.alerting_channels))
 

@@ -20,7 +20,7 @@ async def _run_sensor_validation(validator: ValidatorType, alerts: Queue[Alert])
     """Performs validation for a single sensor. Reports invalid values via alerting queue."""
 
     logger = getLogger(f"{validator.__class__.__name__}[{validator.get_sensor_type().__name__}]")
-    logger.info(f"validating sensor values...")
+    logger.info(f"began validating sensor values")
 
     async for sensor_value in validator.get_sensor_type()():
         # PyCharm claims that `sensor_value` is a coroutine instead of the value itself due to an open bug
