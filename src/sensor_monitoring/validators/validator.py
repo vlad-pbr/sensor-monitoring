@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from collections import namedtuple
+from typing import Type
 
 from pydantic import BaseModel
 
@@ -8,13 +10,12 @@ from .types import SensorType
 
 class Validator(BaseModel, ABC):
     type: SensorType
-    valid_range: tuple[float, float]
+    valid_range: namedtuple('Range', ['min', 'max'])
 
-    @property
     @abstractmethod
-    def sensor(self) -> Sensor:
+    def get_sensor_type(self) -> Type[Sensor]:
         pass
 
     @abstractmethod
-    def validate_data(self) -> None:
+    def is_valid_data(self, data: float) -> bool:
         pass

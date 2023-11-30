@@ -12,5 +12,6 @@
       "type": "PressureSensor",
       "valid_range": [900, 1100]
     }
-  ]
+  ],
+  "log_level": "INFO"
 }

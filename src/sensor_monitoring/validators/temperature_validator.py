@@ -1,14 +1,15 @@
+from typing import Type
+
 from sensor_monitoring.sensors import Sensor, TemperatureSensor
-from .validator import Validator
 from .types import SensorType
+from .validator import Validator
 
 
 class TemperatureValidator(Validator):
     type: SensorType = "TemperatureSensor"
 
-    @property
-    def sensor(self) -> Sensor:
-        return TemperatureSensor()
+    def get_sensor_type(self) -> Type[Sensor]:
+        return TemperatureSensor
 
-    def validate_data(self) -> None:
-        pass
+    def is_valid_data(self, data: float) -> bool:
+        return self.valid_range.min <= data <= self.valid_range.max
