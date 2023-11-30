@@ -6,7 +6,7 @@ authors = ["Vlad Poberezhny <vlad.pbr@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "~3.11"
 pydantic = "~2.5"
 
 [tool.poetry.group.dev.dependencies]
