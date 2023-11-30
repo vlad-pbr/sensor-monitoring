@@ -2,11 +2,11 @@
   "sensors": [
     {
       "type": "TemperatureSensor",
-      "valid_range": [0, 100]
+      "valid_range": [50, 200]
     },
     {
       "type": "HumiditySensor",
-      "valid_range": [0, 100]
+      "valid_range": [10, 90]
     },
     {
       "type": "PressureSensor",
