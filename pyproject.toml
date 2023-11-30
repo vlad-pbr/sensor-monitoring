@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "sensor-monitoring"
+version = "0.1.0"
+description = "Sensor Data Monitoring and Alerting System"
+authors = ["Vlad Poberezhny <vlad.pbr@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "~2.5"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "~7.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
