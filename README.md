@@ -33,4 +33,11 @@ the queue and redistribute it to the configured alerting channels (such as E-Mai
 
 ## Usage
 
-Project dependencies are managed by `poetry`, but a corresponding `requirements.txt` exists as well.
+This app is written in Python 3.11. Project dependencies are managed by `poetry`, but a corresponding
+`requirements.txt` exists as well. In order to run the app, install the relevant requirements from `requirements.txt`
+(preferably in a virtual environment), then start the app by running `python .`.
+
+The default configuration will send sensor alerts as e-mail to a local SMTP server which can be started using
+`python -m smtpd -c DebuggingServer -n localhost:1025`.
+
+Tests can be executed via `python -m unittest`
