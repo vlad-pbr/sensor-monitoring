@@ -13,10 +13,10 @@ async def run_main_service(validators: list[ValidatorType], alerts: Queue[Alert]
 
     async with TaskGroup() as tg:
         for validator in validators:
-            tg.create_task(_run_sensor_validation(validator, alerts))
+            tg.create_task(run_sensor_validation(validator, alerts))
 
 
-async def _run_sensor_validation(validator: ValidatorType, alerts: Queue[Alert]) -> Never:
+async def run_sensor_validation(validator: ValidatorType, alerts: Queue[Alert]) -> Never:
     """Performs validation for a single sensor. Reports invalid values via alerting queue."""
 
     logger = getLogger(f"{validator.__class__.__name__}[{validator.get_sensor_type().__name__}]")
@@ -28,7 +28,7 @@ async def _run_sensor_validation(validator: ValidatorType, alerts: Queue[Alert])
         sensor_value = cast(int, sensor_value)
 
         logger.debug(f"received value '{sensor_value}'")
-        if not validator.valid_range.min <= sensor_value <= validator.valid_range.max:
+        if not is_valid_value(validator, sensor_value):
             logger.debug(f"value '{sensor_value}' was deemed invalid")
             await alerts.put(
                 Alert(
@@ -37,3 +37,9 @@ async def _run_sensor_validation(validator: ValidatorType, alerts: Queue[Alert])
                     value=sensor_value
                 )
             )
+
+
+def is_valid_value(validator: ValidatorType, value: int) -> bool:
+    """Validates sensor value using the provided validator. Value must be within the range (which is inclusive)."""
+
+    return validator.valid_range.min <= value <= validator.valid_range.max
