@@ -23,7 +23,7 @@ async def _run(config_path: Path) -> Never:
         config = Config.model_validate_json(config_file.read())
 
     # root logger configuration for the entire application
-    basicConfig(level=config.log_level)
+    basicConfig(level=config.log_level, format='[%(asctime)s] - %(name)s - %(levelname)s - %(message)s')
     logger = getLogger(__name__)
     logger.info(f"log level is set to '{config.log_level}'")
 
