@@ -19,10 +19,6 @@ the queue and redistribute it to the configured alerting channels (such as E-Mai
 
 ## Assumptions
 
-- Usage of third-party libraries is allowed. Only select, widely acknowledged and trusted libraries were used.
-  The reason behind the decision is to provide a solution to some of the problems irrelevant to the task. For example,
-  `pydantic` was chosen to load and validate configuration so no irrelevant bugs would occur as a result of faulty
-  code that would otherwise have to be manually implemented.
 - Real sensors would be separate processes that yield same values to all "subscribed" validators, but for the sake
   of simplicity of the exercise, each sensor is an entirely separate instance.
 - Sensors can have many validators, but each validator can only validate a single type of sensor. The assumption here
@@ -30,6 +26,10 @@ the queue and redistribute it to the configured alerting channels (such as E-Mai
   range, but in the real world other factors would come into play. Current implementation allows to have multiple
   validators validating various ranges of the same sensor, but makes it easy to expand on validation logic in the
   future.
+- Usage of third-party libraries is allowed. Only select, widely acknowledged and trusted libraries were used.
+  The reason behind the decision is to provide a solution to some of the problems irrelevant to the task. For example,
+  `pydantic` was chosen to load and validate configuration so no irrelevant bugs would occur as a result of faulty
+  code that would otherwise have to be manually implemented.
 
 ## Usage
 

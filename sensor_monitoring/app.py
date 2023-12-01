@@ -5,7 +5,7 @@ from typing import Never, Annotated, Literal
 
 from pydantic import BaseModel, Field
 
-from .models.alert import Alert
+from .models import Alert
 from .services import run_main_service, run_alert_service
 from .types import ValidatorType, AlertingChannelType
 

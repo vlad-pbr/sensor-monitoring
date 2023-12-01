@@ -18,7 +18,7 @@ async def run_alert_service(alerts: Queue[Alert], alerting_channels: list[Alerti
     alerting_logger.propagate = False
     for alerting_channel in alerting_channels:
         alerting_logger.addHandler(alerting_channel.get_logging_handler())
-        logger.debug(f"added '{alerting_channel.__class__.__name__}' alerting channel")
+        logger.info(f"added '{alerting_channel.__class__.__name__}' alerting channel")
 
     while True:
         alert = await alerts.get()
