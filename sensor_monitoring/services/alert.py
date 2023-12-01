@@ -10,7 +10,6 @@ async def run_alert_service(alerts: Queue[Alert], alerting_channels: list[Alerti
     """Reads alerts received from given queue and reports them to appropriate alerting channels."""
 
     logger = getLogger(__name__)
-    logger.info("listening on sensor alerts...")
 
     # set up a separate logger exclusively for alerts and register external logging handlers with it
     alerting_logger = getLogger("Alert")
@@ -19,6 +18,8 @@ async def run_alert_service(alerts: Queue[Alert], alerting_channels: list[Alerti
     for alerting_channel in alerting_channels:
         alerting_logger.addHandler(alerting_channel.get_logging_handler())
         logger.info(f"added '{alerting_channel.__class__.__name__}' alerting channel")
+
+    logger.info("listening on sensor alerts...")
 
     while True:
         alert = await alerts.get()
