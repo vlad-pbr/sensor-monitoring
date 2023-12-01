@@ -7,5 +7,5 @@ class Range(NamedTuple):
 
     @classmethod
     def validate_valid_range(cls, _range: Self) -> Self:
-        assert _range.min < _range.max, f"minimum value '{_range.min}' is lower than maximum value '{_range.max}'"
+        assert _range.min <= _range.max, f"minimum value '{_range.min}' is higher than maximum value '{_range.max}'"
         return _range
